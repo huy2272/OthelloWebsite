@@ -10,7 +10,9 @@ Setup steps:
 2. ## Make client and server folders
 3. ## Using the terminal, cd to the client folder and type "npx create-react-app"
 
-Usage steps:
+USAGE STEPS:
+
+- Make sure to have Node.js installed
 
 1. # Using the terminal, cd to the client folder and type "npm i"
 2. # Repeat the step above with the server folder
