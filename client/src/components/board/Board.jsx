@@ -2,131 +2,110 @@ import React, { useState } from "react";
 import Position from "./Position";
 
 function Board(props) {
-  var [player1, player2] = [props.p1, props.p2];
+  var [player1, player2] = [
+    { name: props.p1name, color: props.p1color },
+    { name: props.p2name, color: props.p2color },
+  ];
 
+  //boardState is an object containing information about the player whose turn it is currently and about the board
   const [boardState, setboardState] = useState({
     currentPlayer: player1,
-    board: [],
+    board: props.board,
   });
 
-  function startGame() {
-    let board = [];
-    const whitePos = [];
-    const blackPos = [];
-    for (let y = 0; y < 8; y++) {
-      board.push([]);
-      for (let x = 0; x < 8; x++) {
-        let piece = "empty";
-        if ((y === 3 && x === 3) || (y === 4 && x === 4)) {
-          piece = "white";
-        } else if ((y === 3 && x === 4) || (y === 4 && x === 3)) {
-          piece = "black";
-        }
-        board[y].push(piece);
-      }
-    }
-    setboardState((prev) => ({ ...prev, board: board }));
-  }
-
-  function invalidMove() {
-    alert("The move played is invalid");
-  }
-
-  function checkMoveDirection(
-    xDir,
-    yDir,
-    xCoord,
-    yCoord,
-    outflank,
-    validMoveArray
-  ) {
-    let opponentPiece =
-      boardState.currentPlayer.color === "black" ? "white" : "black";
-    let pieceCheckX = xCoord + xDir;
-    let pieceCheckY = yCoord + yDir;
-
-    if (
-      pieceCheckX > 7 ||
-      pieceCheckX < 0 ||
-      pieceCheckY > 7 ||
-      pieceCheckY < 0
-    ) {
-      return [];
-    }
-
-    let pieceCheck = boardState.board[pieceCheckY][pieceCheckX];
-
-    if (pieceCheck === opponentPiece) {
-      let newValidMoveArray = [
-        ...validMoveArray,
-        { x: pieceCheckX, y: pieceCheckY },
-      ];
-      return checkMoveDirection(
-        xDir,
-        yDir,
-        pieceCheckX,
-        pieceCheckY,
-        true,
-        newValidMoveArray
-      );
-    } else if (pieceCheck === boardState.currentPlayer.color && outflank) {
-      return validMoveArray;
+  function playPosition(xCoord, yCoord) {
+    if (boardState.board[yCoord][xCoord] !== "empty") {
+      invalidMove();
     } else {
-      return [];
+      let positionsToFlip = checkMove(xCoord, yCoord);
+
+      if (positionsToFlip.length > 0) {
+        positionsToFlip.push({ x: xCoord, y: yCoord });
+        flipPieces(positionsToFlip);
+      } else {
+        invalidMove();
+      }
     }
   }
 
   function checkMove(xCoord, yCoord) {
     let piecesToFlip = [];
 
+    //Looping through every direction a move could ouflank the opponent
     for (let theta = 0; theta < 2 * Math.PI; theta += Math.PI / 4) {
-      let xDir = Math.round(Math.cos(theta));
-      let yDir = Math.round(Math.sin(theta));
-      piecesToFlip = [
-        ...piecesToFlip,
-        ...checkMoveDirection(xDir, yDir, xCoord, yCoord, false, []),
-      ];
+      var xDir = Math.round(Math.cos(theta));
+      var yDir = Math.round(Math.sin(theta));
+      var outflank = false;
+
+      //Adding the outflanked pieces to the pieceToFlip array
+      piecesToFlip = [...piecesToFlip, ...directionalCheckMove(xCoord, yCoord)];
     }
     return piecesToFlip;
-  }
 
-  function flipPieces(positionArray) {}
+    function directionalCheckMove(xCoord, yCoord, outflankedPieces = []) {
+      let currentPlayerPiece = boardState.currentPlayer.color;
+      let opponentPiece = currentPlayerPiece === "black" ? "white" : "black";
+      let pieceCheckX = xCoord + xDir;
+      let pieceCheckY = yCoord + yDir;
 
-  function playPosition(xCoord, yCoord, piece) {
-    if (boardState.board[yCoord][xCoord] !== "empty") {
-      invalidMove();
-    } else {
-      let positionsToFlip = checkMove(xCoord, yCoord);
+      //Checking if the position being checked is out of bounds
+      if (
+        pieceCheckX > 7 ||
+        pieceCheckX < 0 ||
+        pieceCheckY > 7 ||
+        pieceCheckY < 0
+      ) {
+        return [];
+      }
 
-      setboardState((prev) => {
-        let board = [...prev.board];
-        let currentPlayerColor = prev.currentPlayer.color;
+      let pieceCheck = boardState.board[pieceCheckY][pieceCheckX];
 
-        for (let position of positionsToFlip) {
-          board[position.y][position.x] = currentPlayerColor;
-        }
+      if (pieceCheck === opponentPiece) {
+        //appending the piece being checked to the array of outflanked pieces
+        let newOutflankedPieces = [
+          ...outflankedPieces,
+          { x: pieceCheckX, y: pieceCheckY },
+        ];
+        outflank = true;
 
-        if (positionsToFlip.length > 0) {
-          board[yCoord][xCoord] = currentPlayerColor;
-          return {
-            currentPlayer:
-              prev.currentPlayer.name === player1.name ? player2 : player1,
-            board: board,
-          };
-        } else {
-          invalidMove();
-          return prev;
-        }
-      });
+        //recursively checking the next piece in the same direction
+        return directionalCheckMove(
+          pieceCheckX,
+          pieceCheckY,
+          newOutflankedPieces
+        );
+
+        //Checking if the piece allows the opponent to be outflanked
+      } else if (pieceCheck === currentPlayerPiece && outflank) {
+        return outflankedPieces;
+      } else {
+        return [];
+      }
     }
   }
 
-  if (boardState.board.length === 0) {
-    startGame();
+  function flipPieces(positionArray) {
+    let board = [...boardState.board];
+    let currentPlayerColor = boardState.currentPlayer.color;
+
+    for (let position of positionArray) {
+      board[position.y][position.x] = currentPlayerColor;
+    }
+    setboardState((prevBoard) => {
+      return {
+        currentPlayer:
+          prevBoard.currentPlayer.color === player1.color ? player2 : player1,
+        board: board,
+      };
+    });
+  }
+
+  function invalidMove() {
+    alert("The move played is invalid");
   }
 
   return (
-    <div className="game">
+    <div className="board">
       <h1>
         It is the turn of {boardState.currentPlayer.name} (
         {boardState.currentPlayer.color})
