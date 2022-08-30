@@ -12,7 +12,12 @@ function App() {
       });
   }, []);
 
-  return <Board />;
+  return (
+    <Board
+      p1={{ name: "P1", color: "black" }}
+      p2={{ name: "P2", color: "white" }}
+    />
+  );
 }
 
 export default App;
