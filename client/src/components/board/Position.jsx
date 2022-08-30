@@ -7,7 +7,7 @@ function Position(props) {
 
   //<Piece color={props.piece} />
   return (
-    <button onClick={() => props.onPlay(xCoord, yCoord, props.piece)}>
+    <button onClick={() => props.onPlay(xCoord, yCoord)}>
       <Piece color={props.piece} />
     </button>
   );
