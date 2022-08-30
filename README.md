@@ -1,6 +1,6 @@
 # OthelloWebsite
 
-##This branch contains code for leaderboard implementation
+This branch contains code for leaderboard implementation
 
 Read data from JSON file 
 
