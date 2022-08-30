@@ -106,34 +106,38 @@ function Board(props) {
 
   return (
     <div className="board">
-      <h1>
-        It is the turn of {boardState.currentPlayer.name} (
-        {boardState.currentPlayer.color})
-      </h1>
-      <table>
-        <tbody>
-          {boardState.board.map((row, colKey) => {
-            return (
-              <tr key={colKey}>
-                {row.map((piece, rowKey) => {
-                  return (
-                    <td key={rowKey}>
-                      {
-                        <Position
-                          onPlay={playPosition}
-                          xCoord={rowKey}
-                          yCoord={colKey}
-                          piece={piece}
-                        />
-                      }
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      {props.formSubmit && (
+        <h1>
+          It is the turn of {boardState.currentPlayer.name} (
+          {boardState.currentPlayer.color})
+        </h1>
+      )}
+      <div className={!props.formSubmit ? "pregame" : ""}>
+        <table>
+          <tbody>
+            {boardState.board.map((row, colKey) => {
+              return (
+                <tr key={colKey}>
+                  {row.map((piece, rowKey) => {
+                    return (
+                      <td key={rowKey}>
+                        {
+                          <Position
+                            onPlay={playPosition}
+                            xCoord={rowKey}
+                            yCoord={colKey}
+                            piece={piece}
+                          />
+                        }
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

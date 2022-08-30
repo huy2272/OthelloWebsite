@@ -5,6 +5,7 @@ function NameInput(props) {
 
   return (
     <input
+      className="nameInput"
       type="text"
       value={props.value}
       onChange={(event) => {
@@ -12,6 +13,7 @@ function NameInput(props) {
       }}
       placeholder={placeholder}
       name={props.name}
+      autocomplete="off"
     />
   );
 }

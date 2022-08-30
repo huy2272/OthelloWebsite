@@ -44,20 +44,34 @@ function App() {
   }
 
   return (
-    <div className="game">
-      {usernameFormData.submit ? (
-        <Board
-          p1name={usernameFormData.playerNames.p1name}
-          p1color="black"
-          p2name={usernameFormData.playerNames.p2name}
-          p2color="white"
-          board={defaultBoard()}
-        />
-      ) : (
-        <UsernameForm onSub={gameStart} />
-      )}
-    </div>
+    <>
+      <br /> <br />
+      <div className="game">
+        {!usernameFormData.submit && (
+          <>
+            <UsernameForm onSub={gameStart} />
+            <Board
+              p1name={usernameFormData.playerNames.p1name}
+              p1color="black"
+              p2name={usernameFormData.playerNames.p2name}
+              p2color="white"
+              board={defaultBoard()}
+              formSubmit={usernameFormData.submit}
+            />
+          </>
+        )}
+        {usernameFormData.submit && (
+          <Board
+            p1name={usernameFormData.playerNames.p1name}
+            p1color="black"
+            p2name={usernameFormData.playerNames.p2name}
+            p2color="white"
+            board={defaultBoard()}
+            formSubmit={usernameFormData.submit}
+          />
+        )}
+      </div>
+    </>
   );
 }
-
 export default App;

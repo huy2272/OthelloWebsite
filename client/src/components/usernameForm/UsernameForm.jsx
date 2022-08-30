@@ -24,20 +24,22 @@ function UsernameForm(props) {
   }
 
   return (
-    <form onSubmit={(event) => submitNames(event)}>
-      <h1>Enter your names</h1>
-      <NameInput
-        value={playerNames.p1name}
-        name="p1name"
-        onTyping={handleChange}
-      />
-      <NameInput
-        value={playerNames.p2name}
-        name="p2name"
-        onTyping={handleChange}
-      />
-      <input type="submit" />
-    </form>
+    <div className="formContainer">
+      <form className="usernameForm" onSubmit={(event) => submitNames(event)}>
+        <h1>Enter your names</h1>
+        <NameInput
+          value={playerNames.p1name}
+          name="p1name"
+          onTyping={handleChange}
+        />
+        <NameInput
+          value={playerNames.p2name}
+          name="p2name"
+          onTyping={handleChange}
+        />
+        <input className="nameSubmit" type="submit" />
+      </form>
+    </div>
   );
 }
 
