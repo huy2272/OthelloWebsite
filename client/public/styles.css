@@ -2,6 +2,104 @@ body {
     background-color: lightgoldenrodyellow;
 }
 
+h1.title {
+    text-align: center;
+    font-size: 2.5em;
+}
+
+/* Player Card Style */
+.boardAndGameCard {
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.playerCardAndArrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.topPieceImage {
+    margin-bottom: 15px;
+    display: none;
+}
+
+.topPieceImage p {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: -30px;
+}
+
+@media screen and (max-width: 1000px), (max-aspect-ratio: 14/10) {
+    .playerCardAndArrow {
+        display: none;
+    }
+    .topPieceImage {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.redArrow {
+    position: absolute;
+    max-width: 120px;
+    margin-top: -120px;
+    filter: grayscale(20%);
+}
+
+.playerCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    border: 3px solid black;
+    height: 40vh;
+    min-height: 300px;
+    width: 20vh;
+    min-width: 150px;
+    max-width: 200px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+.playerCard p {
+    margin-top: 0vh;
+    font-size: 1.5em;
+}
+
+.game .black {
+    background-image: linear-gradient(0deg, rgb(190, 56, 96),lightcoral);
+}
+
+.game .white {
+    background-image: linear-gradient(0deg, rgb(62, 103, 185),lightblue);
+}
+
+.imgContainer img {
+    height: 15vh;
+    min-height: 100px;
+    min-width: 100px;
+    max-height: 130px;
+    max-width: 130px;
+}
+.imgContainer {
+    background-image: linear-gradient(-45deg, rgb(22, 49, 22), rgb(20, 95, 20));
+    border-radius: 20px;
+    border: 3px solid black;
+    display: block;
+    margin-top: 5vh;
+}
+.game .board .margins {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+/* Player Card Style End */
 
 /* Game Style */
 .game {
@@ -21,7 +119,7 @@ body {
 
 .game .usernameForm {
     border-radius: 15px;
-    border: 3px solid gray;
+    border: 3px solid rgb(36, 93, 76);
     padding: 30px;
     padding-top: 20px;
     background-color: aliceblue;
@@ -50,8 +148,11 @@ body {
 
 .game .board {
     display: flex;
+    justify-items: center;
     align-items: center;
     flex-direction: column;
+    width: 100%;
+    margin :auto
 }
 
 .game .board .pregame {
@@ -84,8 +185,15 @@ body {
 }
 
 .game .board td {
-    width: 10vh;
-    height: 10vh;
+    width: 10vw;
+    height: 10vw;
+}
+
+@media (min-aspect-ratio: 1/1) {
+    .game .board td {
+        width: 10vh;
+        height: 10vh;
+    }
 }
 .game .board img.piece {
     

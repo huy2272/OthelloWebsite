@@ -13,7 +13,7 @@ function NameInput(props) {
       }}
       placeholder={placeholder}
       name={props.name}
-      autocomplete="off"
+      autoComplete="off"
     />
   );
 }

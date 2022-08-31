@@ -45,7 +45,7 @@ function App() {
 
   return (
     <>
-      <br /> <br />
+      <h1 className="title">Othello</h1> <br />
       <div className="game">
         {!usernameFormData.submit && (
           <>

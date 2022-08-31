@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Position from "./Position";
+import PlayerCard from "./PlayerCard";
+import PieceImage from "./PieceImage";
 
 function Board(props) {
   var [player1, player2] = [
@@ -11,6 +13,10 @@ function Board(props) {
   const [boardState, setboardState] = useState({
     currentPlayer: player1,
     board: props.board,
+  });
+  const [playerPieceCount, setPlayerPieceCount] = useState({
+    player1: 2,
+    player2: 2,
   });
 
   function playPosition(xCoord, yCoord) {
@@ -98,6 +104,19 @@ function Board(props) {
         board: board,
       };
     });
+    setPlayerPieceCount((prevCount) => {
+      if (currentPlayerColor === "black") {
+        return {
+          player1: prevCount.player1 + positionArray.length,
+          player2: prevCount.player2 - positionArray.length + 1,
+        };
+      } else {
+        return {
+          player1: prevCount.player1 - positionArray.length + 1,
+          player2: prevCount.player2 + positionArray.length,
+        };
+      }
+    });
   }
 
   function invalidMove() {
@@ -107,36 +126,58 @@ function Board(props) {
   return (
     <div className="board">
       {props.formSubmit && (
-        <h1>
-          It is the turn of {boardState.currentPlayer.name} (
-          {boardState.currentPlayer.color})
-        </h1>
+        <div className="topPieceImage">
+          <p>{boardState.currentPlayer.name}'s turn</p>
+          <PieceImage color={boardState.currentPlayer.color} />
+        </div>
       )}
-      <div className={!props.formSubmit ? "pregame" : ""}>
-        <table>
-          <tbody>
-            {boardState.board.map((row, colKey) => {
-              return (
-                <tr key={colKey}>
-                  {row.map((piece, rowKey) => {
-                    return (
-                      <td key={rowKey}>
-                        {
-                          <Position
-                            onPlay={playPosition}
-                            xCoord={rowKey}
-                            yCoord={colKey}
-                            piece={piece}
-                          />
-                        }
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      <div className="boardAndGameCard">
+        {props.formSubmit && (
+          <PlayerCard
+            name={player1.name}
+            color={player1.color}
+            pieceCount={playerPieceCount.player1}
+            current={
+              boardState.currentPlayer.color === player1.color ? true : false
+            }
+          />
+        )}
+        <div className={!props.formSubmit ? "margins pregame" : "margins"}>
+          <table>
+            <tbody>
+              {boardState.board.map((row, colKey) => {
+                return (
+                  <tr key={colKey}>
+                    {row.map((piece, rowKey) => {
+                      return (
+                        <td key={rowKey}>
+                          {
+                            <Position
+                              onPlay={playPosition}
+                              xCoord={rowKey}
+                              yCoord={colKey}
+                              piece={piece}
+                            />
+                          }
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {props.formSubmit && (
+          <PlayerCard
+            name={player2.name}
+            color={player2.color}
+            pieceCount={playerPieceCount.player2}
+            current={
+              boardState.currentPlayer.color === player2.color ? true : false
+            }
+          />
+        )}
       </div>
     </div>
   );
