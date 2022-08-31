@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "title": "player1",
+        "amount": 3
+    },
+    {
+        "id": 2,
+        "title": "player2",
+        "amount": 9
+    },
+    {
+        "id": 3,
+        "title": "player3",
+        "amount": 12
+    },
+    {
+        "id": 4,
+        "title": "player4",
+        "amount": 10
+    }
+]
