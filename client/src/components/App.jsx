@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Board from "./board/Board";
 import UsernameForm from "./usernameForm/UsernameForm";
+import LeaderBoard from './leaderboard/LeaderBoard';
 
 function App() {
   const [backendData, setBackendData] = useState([{}]);
@@ -8,6 +9,33 @@ function App() {
     submit: false,
     playerNames: { p1name: "", p2name: "" },
   });
+
+  //Random data for leaderboard
+  //Can be put into JSON file later
+  const items = [
+    {
+      id: 'e1',
+      title: 'player1',
+      amount: 3
+    },
+    {
+      id: 'e2',
+      title: 'player2',
+      amount: 9,
+    },
+    {
+      id: 'e3',
+      title: 'player3',
+      amount: 10,
+    },
+    {
+      id: 'e4',
+      title: 'player4',
+      amount: 4,
+    },
+  ];
+
+
 
   useEffect(() => {
     fetch("/api")
@@ -45,6 +73,7 @@ function App() {
 
   return (
     <div className="game">
+      <div>
       {usernameFormData.submit ? (
         <Board
           p1name={usernameFormData.playerNames.p1name}
@@ -56,6 +85,11 @@ function App() {
       ) : (
         <UsernameForm onSub={gameStart} />
       )}
+      </div>
+      <div>
+        <h1 align='center'>Top Players</h1>
+        <LeaderBoard items = {items}/>
+      </div>
     </div>
   );
 }
