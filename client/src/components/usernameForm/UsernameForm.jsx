@@ -25,7 +25,7 @@ function UsernameForm(props) {
 
   return (
     <div className="formContainer">
-      <form className="usernameForm" onSubmit={(event) => submitNames(event)}>
+      <form className="gameForm" onSubmit={(event) => submitNames(event)}>
         <h1>Enter your names</h1>
         <NameInput
           value={playerNames.p1name}
@@ -37,7 +37,7 @@ function UsernameForm(props) {
           name="p2name"
           onTyping={handleChange}
         />
-        <input className="nameSubmit" type="submit" />
+        <input className="gameSubmit" type="submit" />
       </form>
     </div>
   );

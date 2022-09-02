@@ -44,6 +44,16 @@ h1.title {
         flex-direction: column;
         align-items: center;
     }
+    .topPieceImage .imgContainer {
+        height: 10vw;
+        width: 10vw;
+    }
+    .topPieceImage .imgContainer img {
+        height: 10vw;
+        width: 10vw;
+        min-height: 2vw;
+        min-width: 2vw;
+    }
 }
 .redArrow {
     position: absolute;
@@ -117,7 +127,7 @@ h1.title {
     transform: translate(-50%, -50%);
 }
 
-.game .usernameForm {
+.game .gameForm {
     border-radius: 15px;
     border: 3px solid rgb(36, 93, 76);
     padding: 30px;
@@ -137,7 +147,7 @@ h1.title {
     margin: 3px;
 }
 
-.game .nameSubmit {
+.game .gameSubmit {
     background-color: rgb(141, 196, 141);
     border: 1px solid gray;
     border-radius: .5em;

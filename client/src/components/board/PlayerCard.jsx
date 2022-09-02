@@ -5,7 +5,9 @@ import redTriangle from "./boardImg/redtriangle.png";
 function PlayerCard(props) {
   return (
     <div className="playerCardAndArrow">
-      {props.current && <img className="redArrow" src={redTriangle} />}
+      {props.current && !props.gameEnded && (
+        <img className="redArrow" src={redTriangle} />
+      )}
       <div className={"playerCard " + props.color}>
         <PieceImage color={props.color} />
         <h1>{props.name}</h1>
