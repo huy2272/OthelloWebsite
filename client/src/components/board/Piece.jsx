@@ -1,6 +1,6 @@
 import React from "react";
-import blackPiece from "./boardPieces/blackpiece.png";
-import whitePiece from "./boardPieces/whitepiece.png";
+import blackPiece from "./boardImg/blackpiece.png";
+import whitePiece from "./boardImg/whitepiece.png";
 
 function Piece(props) {
   let color = " ";

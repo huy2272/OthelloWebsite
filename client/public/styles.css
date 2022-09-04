@@ -2,16 +2,190 @@ body {
     background-color: lightgoldenrodyellow;
 }
 
+h1.title {
+    text-align: center;
+    font-size: 2.5em;
+}
+
+/* Player Card Style */
+.boardAndGameCard {
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.playerCard h1 {
+    width: 20vh;
+    min-width: 150px;
+    max-width: 200px;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+.playerCardAndArrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.topPieceImage {
+    margin-bottom: 15px;
+    display: none;
+}
+
+.topPieceImage p {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: -30px;
+}
+
+@media screen and (max-width: 1000px), (max-aspect-ratio: 14/10) {
+    .playerCardAndArrow {
+        display: none;
+    }
+    .topPieceImage {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .topPieceImage .imgContainer {
+        height: 10vw;
+        width: 10vw;
+    }
+    .topPieceImage .imgContainer img {
+        height: 10vw;
+        width: 10vw;
+        min-height: 2vw;
+        min-width: 2vw;
+    }
+}
+.redArrow {
+    position: absolute;
+    max-width: 120px;
+    margin-top: -120px;
+    filter: grayscale(20%);
+}
+
+.playerCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    border: 3px solid black;
+    height: 40vh;
+    min-height: 300px;
+    width: 20vh;
+    min-width: 150px;
+    max-width: 200px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+.playerCard p {
+    margin-top: 0vh;
+    font-size: 1.5em;
+}
+
+.game .black {
+    background-image: linear-gradient(0deg, rgb(190, 56, 96),lightcoral);
+}
+
+.game .white {
+    background-image: linear-gradient(0deg, rgb(62, 103, 185),lightblue);
+}
+
+.imgContainer img {
+    height: 15vh;
+    min-height: 100px;
+    min-width: 100px;
+    max-height: 130px;
+    max-width: 130px;
+}
+.imgContainer {
+    background-image: linear-gradient(-45deg, rgb(22, 49, 22), rgb(20, 95, 20));
+    border-radius: 20px;
+    border: 3px solid black;
+    display: block;
+    margin-top: 5vh;
+}
+.game .board .margins {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+/* Player Card Style End */
 
 /* Game Style */
 .game {
-    
+    position:relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.game .formContainer {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.game .gameForm {
+    border-radius: 15px;
+    border: 3px solid rgb(36, 93, 76);
+    padding: 30px;
+    padding-top: 20px;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.game .nameInput {
+    padding-left: 5px;
+    font-size: 1em;
+    border: 1px solid gray;
+    border-radius: .5em;
+    height: 2.5em;
+    margin: 3px;
+}
+
+.game .gameSubmit {
+    background-color: rgb(141, 196, 141);
+    border: 1px solid gray;
+    border-radius: .5em;
+    margin-top: 15px;
+    margin-bottom: -10px;
+    font-size: 1em;
 }
 
 .game .board {
     display: flex;
+    justify-items: center;
     align-items: center;
     flex-direction: column;
+    width: 100%;
+    margin :auto
+}
+
+.game .board .pregame {
+    position: relative;
+}
+
+.game .board .pregame::after {
+    top:0;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    position: absolute;
+    opacity: 0.65;
 }
 
 .game .board table {
@@ -29,8 +203,15 @@ body {
 }
 
 .game .board td {
-    width: 10vh;
-    height: 10vh;
+    width: 10vw;
+    height: 10vw;
+}
+
+@media (min-aspect-ratio: 1/1) {
+    .game .board td {
+        width: 10vh;
+        height: 10vh;
+    }
 }
 .game .board img.piece {
     
