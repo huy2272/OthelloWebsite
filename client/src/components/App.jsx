@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Board from "./board/Board";
 import UsernameForm from "./usernameForm/UsernameForm";
+import LeaderBoard from './leaderboard/LeaderBoard';
+import items from './testData.json'
 
 function App() {
   const [backendData, setBackendData] = useState([{}]);
@@ -45,6 +47,7 @@ function App() {
 
   return (
     <div className="game">
+      <div>
       {usernameFormData.submit ? (
         <Board
           p1name={usernameFormData.playerNames.p1name}
@@ -56,6 +59,11 @@ function App() {
       ) : (
         <UsernameForm onSub={gameStart} />
       )}
+      </div>
+      <div>
+        <h1 align='center'>Top Players</h1>
+        <LeaderBoard items = {items}/>
+      </div>
     </div>
   );
 }
