@@ -34,6 +34,16 @@ function App() {
     // alert(winner.name + " won");
   }
 
+  function playAgain() {
+    setUserNameFormData((prev) => {
+      return { ...prev, submit: false };
+    });
+    setGameEndStats({
+      gameEnd: false,
+      winner: "",
+    });
+  }
+
   //Creates a new board
   function defaultBoard() {
     let board = [];
@@ -62,7 +72,11 @@ function App() {
       <div className="game">
         {!usernameFormData.submit && (
           <>
-            <UsernameForm onSub={gameStart} />
+            <UsernameForm
+              onSub={gameStart}
+              p1name={usernameFormData.playerNames.p1name}
+              p2name={usernameFormData.playerNames.p2name}
+            />
             <Board
               p1name={usernameFormData.playerNames.p1name}
               p1color="black"
@@ -77,7 +91,7 @@ function App() {
         {usernameFormData.submit && (
           <>
             {gameEndStats.gameEnd && (
-              <WinnerScreen winner={gameEndStats.winner} />
+              <WinnerScreen winner={gameEndStats.winner} onReset={playAgain} />
             )}
             <Board
               p1name={usernameFormData.playerNames.p1name}

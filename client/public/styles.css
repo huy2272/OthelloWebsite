@@ -17,6 +17,14 @@ h1.title {
     width: 100%;
 }
 
+.playerCard h1 {
+    width: 20vh;
+    min-width: 150px;
+    max-width: 200px;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
 .playerCardAndArrow {
     display: flex;
     flex-direction: column;

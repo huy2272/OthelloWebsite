@@ -3,7 +3,8 @@ import React from "react";
 function WinnerScreen(props) {
   function playAgain(event) {
     event.preventDefault();
-    alert("Play Again");
+    console.log("WinnerScreen playAgain");
+    props.onReset();
   }
 
   return (
