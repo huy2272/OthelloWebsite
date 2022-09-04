@@ -3,10 +3,10 @@ import './BoardList.css';
 function BoardList(props) {
 
     if (props.items.length === 0) {
-        return <h2 className='expenses-list__fallback'>Found no players.</h2>
+        return <h2 className='items-list__fallback'>Found no players.</h2>
     }
 
-    return <ul className='expenses-list'>
+    return <ul className='items-list'>
         {props.items.map((expense) => (
             <BoardItem
                 //By adding a key we avoid bugs 
