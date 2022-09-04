@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import Board from "./board/Board";
 import UsernameForm from "./usernameForm/UsernameForm";
 import WinnerScreen from "./board/gameEndForm/WinnerScreen";
+import LeaderBoard from './leaderboard/LeaderBoard';
+import items from './testData.json'
+
 
 function App() {
   const [backendData, setBackendData] = useState([{}]);
@@ -68,7 +71,7 @@ function App() {
 
   return (
     <>
-      <h1 className="title">Othello</h1> <br />
+    <h1 className="title">Othello</h1> <br />
       <div className="game">
         {!usernameFormData.submit && (
           <>
@@ -105,7 +108,11 @@ function App() {
           </>
         )}
       </div>
-    </>
+      <div>
+        <h1 align='center'>Top Players</h1>
+        <LeaderBoard items = {items}/>
+      </div>
+    </div>
   );
 }
 export default App;
