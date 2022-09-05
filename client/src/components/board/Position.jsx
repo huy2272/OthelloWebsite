@@ -5,9 +5,15 @@ function Position(props) {
   const xCoord = props.xCoord;
   const yCoord = props.yCoord;
 
+  function click() {
+    if (props.clickable) {
+      props.onPlay(xCoord, yCoord);
+    }
+  }
+
   //<Piece color={props.piece} />
   return (
-    <button onClick={() => props.onPlay(xCoord, yCoord)}>
+    <button onClick={() => click()}>
       <Piece color={props.piece} />
     </button>
   );
