@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Board from "./board/Board";
 import UsernameForm from "./usernameForm/UsernameForm";
 import LeaderBoard from './leaderboard/LeaderBoard';
-import items from './testData.json'
+import items from './testData.json';
 
 function App() {
   const [backendData, setBackendData] = useState([{}]);
