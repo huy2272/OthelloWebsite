@@ -1,7 +1,10 @@
 # OthelloWebsite
 
-### Set-up Instructions
 
+### Website URL
+https://merry-empanada-184f7d.netlify.app/
+
+### Local set-up Instructions
 * Setup steps:
 
 1. Download Node.js
